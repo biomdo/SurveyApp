@@ -98,8 +98,11 @@ class MainAdapter(val survey: Survey): RecyclerView.Adapter<MainAdapter.CustomVi
 
         //Store Farmer to DB
         fun storeFarmer(farmer: Farmer?){
-            if(db.insertFarmer(farmer!!))
-               setCurrentQuestion(survey.start_question_id) //Restart the survey
+            if(db.insertFarmer(farmer!!)) {
+                //Restart the Survey
+                currentQuestion = survey.questions.get(0)
+                nextQuestion = survey.questions.get(0)
+            }
         }
 
         //Init the first Question
